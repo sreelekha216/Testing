@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: true
+
+  tasks: 
+  - name: Create user formac
+    user:
+       name: "formac"
+       shell: "/bin/bash"
+       password: password | password_hash('sha512')
+

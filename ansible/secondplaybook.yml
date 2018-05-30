@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+  - name: Check RAM
+    command: free -m
+    register: ram
+
+  - debug: var=ram.stdout_lines
+
+  - name: Check Mount points
+    command: df -hT
+    register: mount
+
+  - debug: var=mount.stdout_lines
+
+  - name: Check Virtual Memory Status
+    command: vmstat
+    register: virtual
+
+  - debug: var=virtual.stdout_lines

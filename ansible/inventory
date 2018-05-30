@@ -1,0 +1,33 @@
+node01 ansible_ssh_host=172.31.1.67
+node02 ansible_ssh_host=172.31.9.195
+#node03 ansible_ssh_host=172.31.13.32
+
+
+[webserver]
+node01
+
+#[ubuntu]
+#node03
+
+[dbserver]
+node02
+
+
+[datacenter:children]
+webserver
+dbserver
+#ubuntu
+
+[webserver:vars]
+ansible_ssh_user=centos
+
+[dbserver:vars]
+ansible_ssh_user=centos
+
+#[ubuntu:vars]
+#ansible_ssh_user=ubuntu
+
+[datacenter:vars]
+ansible_ssh_user=centos
+ansible_ssh_port=22
+ansible_ssh_private_key_file=./AnsibleDemo.pem

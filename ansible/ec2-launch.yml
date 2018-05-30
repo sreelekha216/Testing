@@ -1,0 +1,63 @@
+---
+
+- hosts: localhost
+  become: true
+  gather_facts: no
+
+  vars:
+     region: N. California
+     instance_type: t2.micro
+     ami_id: ami-2cbda54c
+     sg_group: Ansible_demo
+     private_key: AnsibleDemo
+
+  tasks:
+  - name: Launch EC2 ubuntu
+    ec2:
+       region: "{{ region }}"
+       instance_type: "{{ instance_type }}"
+       image: "{{ ami_id }}"
+       group: "{{ sg_group }}"
+       key_name: "{{ private_key }}"
+       aws_access_key: AKIAJLA56FW5AAAM42AA
+       aws_secret_key: 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
+    register: ec2
+
+  - debug: var=ec2
+
+
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~

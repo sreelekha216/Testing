@@ -1,0 +1,58 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: Install Apache webserver
+    yum:
+       name: httpd
+       state: latest
+    when: ansible_os_family=="RedHat"
+
+  - name: Install Apache Webserver1
+    apt:
+     name: apache2
+     state: latest
+    when: ansible_os_family=="Debian"
+
+  - name: Start Apache Service
+    service:
+        name: httpd
+        state: started
+    when: ansible_os_family=="RedHat"
+  
+  - name: Start Apache Service1
+    service:
+         name: apache2
+         state: started
+    when: ansible_os_family=="Debian"
+
+
+  - name: enable Apache Service
+    service:
+        name: httpd
+        enabled: yes
+    when: ansible_os_family=="RedHat"
+   
+  - name: enable apache service1
+    service:
+         name: apache2
+         enabled: yes
+    when: ansible_os_family=="Debian"
+
+  - name: Check apache service
+    command: service httpd status
+    when: ansible_os_family=="RedHat"
+    register: apache_status
+   
+  - debug: var=apache_status.stdout.lines
+
+  - name: Check Apache Service
+    command: service apache2 status
+    when: ansible_os_family=="Debian"
+    register: apache2_status
+
+  - debug: var=apache22_status.stdout_lines
+

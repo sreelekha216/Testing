@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+      username: "formacinc"
+      shell: "/bin/bash"
+      password: "password"
+  
+  tasks:
+  - name: creating user name
+    user:
+       name: "{{ username }}"
+       shell: "{{ shell }}"
+       password: "{{ password | password_hash('sha512') }}"

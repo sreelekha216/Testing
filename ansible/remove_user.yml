@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: true
+  
+  tasks: 
+  - name: Removing user
+    user:
+       name: "Formac"
+       state: absent
+       remove: yes
+
